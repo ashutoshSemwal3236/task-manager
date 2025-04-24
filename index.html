@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager Dashboard</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Auth Section -->
+    <div id="authContainer" class="auth-container">
+      <h1>Task Manager</h1>
+      <div id="authBox" class="auth-box">
+        <h2 id="authTitle">Login</h2>
+        <input
+          type="text"
+          id="username"
+          placeholder="Enter your username"
+          required
+        />
+        <input
+          type="password"
+          id="password"
+          placeholder="Enter your password"
+          required
+        />
+        <button id="authButton" onclick="handleAuth()">Login</button>
+        <div id="authSpinner" class="spinner"></div>
+        <p class="toggle-auth" onclick="toggleAuthMode()">
+          Don't have an account? Sign Up
+        </p>
+      </div>
+    </div>
+    <!-- Dashboard Section -->
+    <div id="dashboard" class="dashboard" style="display: none">
+      <div class="sidebar">
+        <h2>Task Manager</h2>
+        <button onclick="showDashboardSection()">Dashboard</button>
+        <button onclick="showTasksSection()">Tasks</button>
+        <button onclick="showWeeklySchedule()">Weekly Schedule</button>
+        <button onclick="toggleTheme()">Toggle Theme</button>
+        <button onclick="logout()">Logout</button>
+      </div>
+      <div class="main-content">
+        <div class="header">
+          <h1 id="headerTitle">Dashboard</h1>
+          <div class="controls">
+            <select id="sortBy" onchange="sortTasks()" style="display: none">
+              <option value="priority">Priority</option>
+              <option value="created">Created</option>
+            </select>
+            <span>Welcome, <span id="userDisplay"></span>!</span>
+          </div>
+        </div>
+        <div id="dashboardSection" class="dashboard-section">
+          <div id="analytics" class="analytics">
+            <h2>Analytics</h2>
+            <canvas id="taskChart" width="400" height="400"></canvas>
+            <div id="progressContainer" class="progress-container">
+              <h3>Task Completion Progress</h3>
+              <div class="progress-bar">
+                <div id="progressBar" class="progress-fill"></div>
+              </div>
+              <p id="progressText">0% Complete</p>
+            </div>
+          </div>
+          <div id="recentTasksContainer" class="recent-tasks">
+            <h2>Recent Tasks</h2>
+            <ul id="recentTasks" class="task-list"></ul>
+          </div>
+        </div>
+        <div id="tasksSection" class="tasks-section" style="display: none">
+          <div class="task-form">
+            <input
+              type="text"
+              id="taskInput"
+              placeholder="Enter task description (e.g., Finish project report)"
+              required
+            />
+            <input
+              type="datetime-local"
+              id="taskTime"
+              placeholder="Select task date and time"
+              required
+            />
+            <input
+              type="number"
+              id="notifyBefore"
+              placeholder="Notify X minutes before task (e.g., 10)"
+              min="1"
+              required
+            />
+            <select id="priority" required>
+              <option value="" disabled selected>Select Priority</option>
+              <option value="low">Low Priority</option>
+              <option value="medium">Medium Priority</option>
+              <option value="high">High Priority</option>
+            </select>
+            <select id="category" required>
+              <option value="" disabled selected>Select Category</option>
+              <option value="Work">Work</option>
+              <option value="Personal">Personal</option>
+              <option value="Study">Study</option>
+              <option value="Others">Others</option>
+            </select>
+            <select id="recurrence" required>
+              <option value="" disabled selected>Select Recurrence</option>
+              <option value="none">No Recurrence</option>
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+            </select>
+            <button onclick="addTask()">Add Task</button>
+          </div>
+          <ul id="taskList" class="task-list"></ul>
+        </div>
+        <div id="weeklySchedule" class="weekly-schedule" style="display: none">
+          <h2>Weekly Schedule</h2>
+          <button onclick="closeWeeklySchedule()">Close</button>
+          <div class="day-schedule">
+            <h3>Monday</h3>
+            <div class="schedule-form">
+              <input
+                type="text"
+                id="mondayTask"
+                placeholder="Task (e.g., Team meeting)"
+              />
+              <input type="time" id="mondayTime" placeholder="Select time" />
+              <button onclick="addWeeklyTask('Monday')">Add</button>
+            </div>
+            <ul id="mondayTasks" class="schedule-list"></ul>
+          </div>
+          <div class="day-schedule">
+            <h3>Tuesday</h3>
+            <div class="schedule-form">
+              <input
+                type="text"
+                id="tuesdayTask"
+                placeholder="Task (e.g., Study session)"
+              />
+              <input type="time" id="tuesdayTime" placeholder="Select time" />
+              <button onclick="addWeeklyTask('Tuesday')">Add</button>
+            </div>
+            <ul id="tuesdayTasks" class="schedule-list"></ul>
+          </div>
+          <div class="day-schedule">
+            <h3>Wednesday</h3>
+            <div class="schedule-form">
+              <input
+                type="text"
+                id="wednesdayTask"
+                placeholder="Task (e.g., Gym workout)"
+              />
+              <input type="time" id="wednesdayTime" placeholder="Select time" />
+              <button onclick="addWeeklyTask('Wednesday')">Add</button>
+            </div>
+            <ul id="wednesdayTasks" class="schedule-list"></ul>
+          </div>
+          <div class="day-schedule">
+            <h3>Thursday</h3>
+            <div class="schedule-form">
+              <input
+                type="text"
+                id="thursdayTask"
+                placeholder="Task (e.g., Project review)"
+              />
+              <input type="time" id="thursdayTime" placeholder="Select time" />
+              <button onclick="addWeeklyTask('Thursday')">Add</button>
+            </div>
+            <ul id="thursdayTasks" class="schedule-list"></ul>
+          </div>
+          <div class="day-schedule">
+            <h3>Friday</h3>
+            <div class="schedule-form">
+              <input
+                type="text"
+                id="fridayTask"
+                placeholder="Task (e.g., Client call)"
+              />
+              <input type="time" id="fridayTime" placeholder="Select time" />
+              <button onclick="addWeeklyTask('Friday')">Add</button>
+            </div>
+            <ul id="fridayTasks" class="schedule-list"></ul>
+          </div>
+          <div class="day-schedule">
+            <h3>Saturday</h3>
+            <div class="schedule-form">
+              <input
+                type="text"
+                id="saturdayTask"
+                placeholder="Task (e.g., Grocery shopping)"
+              />
+              <input type="time" id="saturdayTime" placeholder="Select time" />
+              <button onclick="addWeeklyTask('Saturday')">Add</button>
+            </div>
+            <ul id="saturdayTasks" class="schedule-list"></ul>
+          </div>
+          <div class="day-schedule">
+            <h3>Sunday</h3>
+            <div class="schedule-form">
+              <input
+                type="text"
+                id="sundayTask"
+                placeholder="Task (e.g., Family time)"
+              />
+              <input type="time" id="sundayTime" placeholder="Select time" />
+              <button onclick="addWeeklyTask('Sunday')">Add</button>
+            </div>
+            <ul id="sundayTasks" class="schedule-list"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <audio id="alarmSound" src="alarm.wav"></audio>
+    <!-- Replace with local file -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
