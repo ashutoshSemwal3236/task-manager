@@ -4,7 +4,7 @@ const urlsToCache = [
   "/index.html",
   "/styles.css",
   "/app.js",
-  "/alarm.wav",
+  "/alarm.mp3",
   "https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap",
   "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css",
   "https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js",
