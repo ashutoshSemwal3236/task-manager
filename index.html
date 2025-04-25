@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task Manager Dashboard</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
     <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
@@ -17,7 +17,7 @@
   <body>
     <!-- Auth Section -->
     <div id="authContainer" class="auth-container">
-      <h1>Task Manager</h1>
+      <h1><i class="fas fa-tasks"></i> Task Manager</h1>
       <div id="authBox" class="auth-box">
         <h2 id="authTitle">Login</h2>
         <input
@@ -32,7 +32,9 @@
           placeholder="Enter your password"
           required
         />
-        <button id="authButton" onclick="handleAuth()">Login</button>
+        <button id="authButton" onclick="handleAuth()">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </button>
         <div id="authSpinner" class="spinner"></div>
         <p class="toggle-auth" onclick="toggleAuthMode()">
           Don't have an account? Sign Up
@@ -42,16 +44,28 @@
     <!-- Dashboard Section -->
     <div id="dashboard" class="dashboard" style="display: none">
       <div class="sidebar">
-        <h2>Task Manager</h2>
-        <button onclick="showDashboardSection()">Dashboard</button>
-        <button onclick="showTasksSection()">Tasks</button>
-        <button onclick="showWeeklySchedule()">Weekly Schedule</button>
-        <button onclick="toggleTheme()">Toggle Theme</button>
-        <button onclick="logout()">Logout</button>
+        <h2><i class="fas fa-tasks"></i> Task Manager</h2>
+        <button onclick="showDashboardSection()">
+          <i class="fas fa-tachometer-alt"></i> Dashboard
+        </button>
+        <button onclick="showTasksSection()">
+          <i class="fas fa-clipboard-list"></i> Tasks
+        </button>
+        <button onclick="showWeeklySchedule()">
+          <i class="fas fa-calendar-alt"></i> Weekly Schedule
+        </button>
+        <button onclick="toggleTheme()">
+          <i class="fas fa-adjust"></i> Toggle Theme
+        </button>
+        <button onclick="logout()">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
       </div>
       <div class="main-content">
         <div class="header">
-          <h1 id="headerTitle">Dashboard</h1>
+          <h1 id="headerTitle">
+            <i class="fas fa-tachometer-alt"></i> Dashboard
+          </h1>
           <div class="controls">
             <select id="sortBy" onchange="sortTasks()" style="display: none">
               <option value="priority">Priority</option>
@@ -62,7 +76,12 @@
         </div>
         <div id="dashboardSection" class="dashboard-section">
           <div id="analytics" class="analytics">
-            <h2>Analytics</h2>
+            <h2><i class="fas fa-chart-pie"></i> Analytics</h2>
+            <img
+              src="https://via.placeholder.com/150?text=Tasks"
+              alt="Tasks Icon"
+              class="dashboard-image"
+            />
             <canvas id="taskChart" width="400" height="400"></canvas>
             <div id="progressContainer" class="progress-container">
               <h3>Task Completion Progress</h3>
@@ -73,7 +92,7 @@
             </div>
           </div>
           <div id="recentTasksContainer" class="recent-tasks">
-            <h2>Recent Tasks</h2>
+            <h2><i class="fas fa-history"></i> Recent Tasks</h2>
             <ul id="recentTasks" class="task-list"></ul>
           </div>
         </div>
@@ -118,13 +137,17 @@
               <option value="weekly">Weekly</option>
               <option value="monthly">Monthly</option>
             </select>
-            <button onclick="addTask()">Add Task</button>
+            <button onclick="addTask()">
+              <i class="fas fa-plus"></i> Add Task
+            </button>
           </div>
           <ul id="taskList" class="task-list"></ul>
         </div>
         <div id="weeklySchedule" class="weekly-schedule" style="display: none">
-          <h2>Weekly Schedule</h2>
-          <button onclick="closeWeeklySchedule()">Close</button>
+          <h2><i class="fas fa-calendar-alt"></i> Weekly Schedule</h2>
+          <button onclick="closeWeeklySchedule()">
+            <i class="fas fa-times"></i> Close
+          </button>
           <div class="day-schedule">
             <h3>Monday</h3>
             <div class="schedule-form">
@@ -134,7 +157,9 @@
                 placeholder="Task (e.g., Team meeting)"
               />
               <input type="time" id="mondayTime" placeholder="Select time" />
-              <button onclick="addWeeklyTask('Monday')">Add</button>
+              <button onclick="addWeeklyTask('Monday')">
+                <i class="fas fa-plus"></i> Add
+              </button>
             </div>
             <ul id="mondayTasks" class="schedule-list"></ul>
           </div>
@@ -147,7 +172,9 @@
                 placeholder="Task (e.g., Study session)"
               />
               <input type="time" id="tuesdayTime" placeholder="Select time" />
-              <button onclick="addWeeklyTask('Tuesday')">Add</button>
+              <button onclick="addWeeklyTask('Tuesday')">
+                <i class="fas fa-plus"></i> Add
+              </button>
             </div>
             <ul id="tuesdayTasks" class="schedule-list"></ul>
           </div>
@@ -160,7 +187,9 @@
                 placeholder="Task (e.g., Gym workout)"
               />
               <input type="time" id="wednesdayTime" placeholder="Select time" />
-              <button onclick="addWeeklyTask('Wednesday')">Add</button>
+              <button onclick="addWeeklyTask('Wednesday')">
+                <i class="fas fa-plus"></i> Add
+              </button>
             </div>
             <ul id="wednesdayTasks" class="schedule-list"></ul>
           </div>
@@ -173,7 +202,9 @@
                 placeholder="Task (e.g., Project review)"
               />
               <input type="time" id="thursdayTime" placeholder="Select time" />
-              <button onclick="addWeeklyTask('Thursday')">Add</button>
+              <button onclick="addWeeklyTask('Thursday')">
+                <i class="fas fa-plus"></i> Add
+              </button>
             </div>
             <ul id="thursdayTasks" class="schedule-list"></ul>
           </div>
@@ -186,7 +217,9 @@
                 placeholder="Task (e.g., Client call)"
               />
               <input type="time" id="fridayTime" placeholder="Select time" />
-              <button onclick="addWeeklyTask('Friday')">Add</button>
+              <button onclick="addWeeklyTask('Friday')">
+                <i class="fas fa-plus"></i> Add
+              </button>
             </div>
             <ul id="fridayTasks" class="schedule-list"></ul>
           </div>
@@ -199,7 +232,9 @@
                 placeholder="Task (e.g., Grocery shopping)"
               />
               <input type="time" id="saturdayTime" placeholder="Select time" />
-              <button onclick="addWeeklyTask('Saturday')">Add</button>
+              <button onclick="addWeeklyTask('Saturday')">
+                <i class="fas fa-plus"></i> Add
+              </button>
             </div>
             <ul id="saturdayTasks" class="schedule-list"></ul>
           </div>
@@ -212,15 +247,16 @@
                 placeholder="Task (e.g., Family time)"
               />
               <input type="time" id="sundayTime" placeholder="Select time" />
-              <button onclick="addWeeklyTask('Sunday')">Add</button>
+              <button onclick="addWeeklyTask('Sunday')">
+                <i class="fas fa-plus"></i> Add
+              </button>
             </div>
             <ul id="sundayTasks" class="schedule-list"></ul>
           </div>
         </div>
       </div>
     </div>
-    <audio id="alarmSound" src="alarm.wav"></audio>
-    <!-- Replace with local file -->
+    <audio id="alarmSound" src="alarm.mp3"></audio>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="app.js"></script>
   </body>

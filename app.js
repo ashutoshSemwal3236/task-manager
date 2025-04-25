@@ -6,9 +6,7 @@ const alarmSound = document.getElementById("alarmSound");
 
 // Initialize app
 document.addEventListener("DOMContentLoaded", () => {
-  console.log(
-    "Task Manager initializing... Version: 2025-04-24-v8 (App Name, Recent Tasks, Larger Notifications)"
-  );
+  console.log("Task Manager initializing... (Modern UI, Enhanced Light Theme)");
   console.log("Checking DOM elements...");
   const dashboardSection = document.getElementById("dashboardSection");
   const tasksSection = document.getElementById("tasksSection");
@@ -147,11 +145,11 @@ function toggleAuthMode() {
     const toggleText = document.querySelector(".toggle-auth");
     if (title.textContent === "Login") {
       title.textContent = "Sign Up";
-      button.textContent = "Sign Up";
+      button.innerHTML = '<i class="fas fa-user-plus"></i> Sign Up';
       toggleText.textContent = "Already have an account? Login";
     } else {
       title.textContent = "Login";
-      button.textContent = "Login";
+      button.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
       toggleText.textContent = "Don't have an account? Sign Up";
     }
   } catch (error) {
@@ -223,7 +221,8 @@ function logout() {
     document.getElementById("username").value = "";
     document.getElementById("password").value = "";
     document.getElementById("authTitle").textContent = "Login";
-    document.getElementById("authButton").textContent = "Login";
+    document.getElementById("authButton").innerHTML =
+      '<i class="fas fa-sign-in-alt"></i> Login';
     document.querySelector(".toggle-auth").textContent =
       "Don't have an account? Sign Up";
   } catch (error) {
@@ -255,11 +254,11 @@ function renderTasks(tasksToRender) {
       li.draggable = true;
       li.dataset.id = task.id;
       li.innerHTML = `
-                <span>${task.description} - ${new Date(
-        task.time
-      ).toLocaleString()} (Notify ${task.notifyBefore} min before, Priority: ${
-        task.priority
-      }, Category: ${task.category}${
+                <span><i class="fas fa-tasks"></i> ${
+                  task.description
+                } - ${new Date(task.time).toLocaleString()} (Notify ${
+        task.notifyBefore
+      } min before, Priority: ${task.priority}, Category: ${task.category}${
         task.dayOfWeek ? ", Day: " + task.dayOfWeek : ""
       })</span>
                 <div class="actions">
@@ -301,9 +300,9 @@ function renderWeeklyTasks() {
         .forEach((task) => {
           const li = document.createElement("li");
           li.innerHTML = `
-                    <span>${task.description} at ${new Date(
-            task.time
-          ).toLocaleTimeString()}</span>
+                    <span><i class="fas fa-calendar-alt"></i> ${
+                      task.description
+                    } at ${new Date(task.time).toLocaleTimeString()}</span>
                     <div class="actions">
                         <button class="complete" onclick="toggleComplete('${
                           task.id
@@ -333,9 +332,9 @@ function renderRecentTasks() {
       const li = document.createElement("li");
       li.className = `task-item ${task.completed ? "completed" : ""}`;
       li.innerHTML = `
-                <span>${task.description} - ${new Date(
-        task.time
-      ).toLocaleString()}${
+                <span><i class="fas fa-history"></i> ${
+                  task.description
+                } - ${new Date(task.time).toLocaleString()}${
         task.dayOfWeek ? " (" + task.dayOfWeek + ")" : ""
       }</span>
                 <div class="actions">
@@ -626,13 +625,13 @@ function checkTasks() {
           console.log(`Triggering notification for task: ${task.description}`);
           alarmSound.play().catch((error) => {
             console.error("Error playing alarm:", error);
-            const alertMessage = `Task "${
+            const alertMessage = `<i class="fas fa-bell"></i> Task "${
               task.description
             }" is due at ${taskTime.toLocaleString()}!`;
-            const style = `font-size: 18px; padding: 20px; border-radius: 8px; background: #bb86fc; color: #fff;`;
+            const style = `font-size: 18px; padding: 20px; border-radius: 8px; background: linear-gradient(135deg, #7b1fa2, #ab47bc); color: #fff; display: flex; align-items: center; gap: 10px;`;
             const alertBox = document.createElement("div");
             alertBox.style.cssText = style;
-            alertBox.textContent = alertMessage;
+            alertBox.innerHTML = alertMessage;
             document.body.appendChild(alertBox);
             setTimeout(() => alertBox.remove(), 5000);
           });
@@ -641,8 +640,8 @@ function checkTasks() {
               body: `Task "${
                 task.description
               }" is due at ${taskTime.toLocaleString()}!`,
-              icon: "https://via.placeholder.com/64",
-              badge: "https://via.placeholder.com/32",
+              icon: "https://via.placeholder.com/64?text=Task",
+              badge: "https://via.placeholder.com/32?text=T",
               data: { fontSize: "18px" },
             });
           }
@@ -695,9 +694,9 @@ function updateAnalytics() {
     const ctx = document.getElementById("taskChart").getContext("2d");
     const isLightTheme = document.body.classList.contains("light-theme");
     const backgroundColors = isLightTheme
-      ? ["#4caf50", "#f44336"]
-      : ["#03dac6", "#cf6679"];
-    const borderColor = isLightTheme ? "#333" : "#e0e0e0";
+      ? ["#4db6ac", "#ef5350"]
+      : ["#26a69a", "#ef5350"];
+    const borderColor = isLightTheme ? "#006064" : "#e0e0e0";
 
     if (taskChart) {
       taskChart.destroy();
@@ -722,13 +721,15 @@ function updateAnalytics() {
           legend: {
             position: "top",
             labels: {
-              color: isLightTheme ? "#333" : "#e0e0e0",
+              color: isLightTheme ? "#006064" : "#e0e0e0",
+              font: { family: "Poppins", weight: "600" },
             },
           },
           title: {
             display: true,
             text: "Task Status Distribution",
-            color: isLightTheme ? "#333" : "#e0e0e0",
+            color: isLightTheme ? "#006064" : "#e0e0e0",
+            font: { family: "Poppins", size: 18, weight: "700" },
           },
         },
       },
