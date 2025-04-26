@@ -17,9 +17,11 @@
   <body>
     <!-- Auth Section -->
     <div id="authContainer" class="auth-container">
+      <img src="assets/task-icon.svg" alt="Task Icon" class="auth-icon" />
       <h1><i class="fas fa-tasks"></i> Task Manager</h1>
       <div id="authBox" class="auth-box">
         <h2 id="authTitle">Login</h2>
+        <div id="authMessage" class="auth-message"></div>
         <input
           type="text"
           id="username"
@@ -32,7 +34,7 @@
           placeholder="Enter your password"
           required
         />
-        <button id="authButton" onclick="handleAuth()">
+        <button id="authButton" onclick="handleAuth()" title="Login or Sign Up">
           <i class="fas fa-sign-in-alt"></i> Login
         </button>
         <div id="authSpinner" class="spinner"></div>
@@ -45,19 +47,19 @@
     <div id="dashboard" class="dashboard" style="display: none">
       <div class="sidebar">
         <h2><i class="fas fa-tasks"></i> Task Manager</h2>
-        <button onclick="showDashboardSection()">
+        <button onclick="showDashboardSection()" title="View Dashboard">
           <i class="fas fa-tachometer-alt"></i> Dashboard
         </button>
-        <button onclick="showTasksSection()">
+        <button onclick="showTasksSection()" title="Manage Tasks">
           <i class="fas fa-clipboard-list"></i> Tasks
         </button>
-        <button onclick="showWeeklySchedule()">
+        <button onclick="showWeeklySchedule()" title="View Weekly Schedule">
           <i class="fas fa-calendar-alt"></i> Weekly Schedule
         </button>
-        <button onclick="toggleTheme()">
+        <button onclick="toggleTheme()" title="Switch Light/Dark Theme">
           <i class="fas fa-adjust"></i> Toggle Theme
         </button>
-        <button onclick="logout()">
+        <button onclick="logout()" title="Log Out">
           <i class="fas fa-sign-out-alt"></i> Logout
         </button>
       </div>
@@ -78,11 +80,11 @@
           <div id="analytics" class="analytics">
             <h2><i class="fas fa-chart-pie"></i> Analytics</h2>
             <img
-              src="https://via.placeholder.com/150?text=Tasks"
+              src="assets/task-icon.svg"
               alt="Tasks Icon"
               class="dashboard-image"
             />
-            <canvas id="taskChart" width="400" height="400"></canvas>
+            <canvas id="taskChart" width="400" height="300"></canvas>
             <div id="progressContainer" class="progress-container">
               <h3>Task Completion Progress</h3>
               <div class="progress-bar">
@@ -110,13 +112,6 @@
               placeholder="Select task date and time"
               required
             />
-            <input
-              type="number"
-              id="notifyBefore"
-              placeholder="Notify X minutes before task (e.g., 10)"
-              min="1"
-              required
-            />
             <select id="priority" required>
               <option value="" disabled selected>Select Priority</option>
               <option value="low">Low Priority</option>
@@ -137,7 +132,7 @@
               <option value="weekly">Weekly</option>
               <option value="monthly">Monthly</option>
             </select>
-            <button onclick="addTask()">
+            <button onclick="addTask()" title="Add New Task">
               <i class="fas fa-plus"></i> Add Task
             </button>
           </div>
@@ -145,7 +140,7 @@
         </div>
         <div id="weeklySchedule" class="weekly-schedule" style="display: none">
           <h2><i class="fas fa-calendar-alt"></i> Weekly Schedule</h2>
-          <button onclick="closeWeeklySchedule()">
+          <button onclick="closeWeeklySchedule()" title="Close Schedule">
             <i class="fas fa-times"></i> Close
           </button>
           <div class="day-schedule">
@@ -157,7 +152,10 @@
                 placeholder="Task (e.g., Team meeting)"
               />
               <input type="time" id="mondayTime" placeholder="Select time" />
-              <button onclick="addWeeklyTask('Monday')">
+              <button
+                onclick="addWeeklyTask('Monday')"
+                title="Add Task for Monday"
+              >
                 <i class="fas fa-plus"></i> Add
               </button>
             </div>
@@ -172,7 +170,10 @@
                 placeholder="Task (e.g., Study session)"
               />
               <input type="time" id="tuesdayTime" placeholder="Select time" />
-              <button onclick="addWeeklyTask('Tuesday')">
+              <button
+                onclick="addWeeklyTask('Tuesday')"
+                title="Add Task for Tuesday"
+              >
                 <i class="fas fa-plus"></i> Add
               </button>
             </div>
@@ -187,7 +188,10 @@
                 placeholder="Task (e.g., Gym workout)"
               />
               <input type="time" id="wednesdayTime" placeholder="Select time" />
-              <button onclick="addWeeklyTask('Wednesday')">
+              <button
+                onclick="addWeeklyTask('Wednesday')"
+                title="Add Task for Wednesday"
+              >
                 <i class="fas fa-plus"></i> Add
               </button>
             </div>
@@ -202,7 +206,10 @@
                 placeholder="Task (e.g., Project review)"
               />
               <input type="time" id="thursdayTime" placeholder="Select time" />
-              <button onclick="addWeeklyTask('Thursday')">
+              <button
+                onclick="addWeeklyTask('Thursday')"
+                title="Add Task for Thursday"
+              >
                 <i class="fas fa-plus"></i> Add
               </button>
             </div>
@@ -217,7 +224,10 @@
                 placeholder="Task (e.g., Client call)"
               />
               <input type="time" id="fridayTime" placeholder="Select time" />
-              <button onclick="addWeeklyTask('Friday')">
+              <button
+                onclick="addWeeklyTask('Friday')"
+                title="Add Task for Friday"
+              >
                 <i class="fas fa-plus"></i> Add
               </button>
             </div>
@@ -232,7 +242,10 @@
                 placeholder="Task (e.g., Grocery shopping)"
               />
               <input type="time" id="saturdayTime" placeholder="Select time" />
-              <button onclick="addWeeklyTask('Saturday')">
+              <button
+                onclick="addWeeklyTask('Saturday')"
+                title="Add Task for Saturday"
+              >
                 <i class="fas fa-plus"></i> Add
               </button>
             </div>
@@ -247,7 +260,10 @@
                 placeholder="Task (e.g., Family time)"
               />
               <input type="time" id="sundayTime" placeholder="Select time" />
-              <button onclick="addWeeklyTask('Sunday')">
+              <button
+                onclick="addWeeklyTask('Sunday')"
+                title="Add Task for Sunday"
+              >
                 <i class="fas fa-plus"></i> Add
               </button>
             </div>
@@ -256,7 +272,7 @@
         </div>
       </div>
     </div>
-    <audio id="alarmSound" src="alarm.mp3"></audio>
+    <audio id="alarmSound" src="assets/alarm.wav" preload="auto"></audio>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="app.js"></script>
   </body>
